@@ -1,3 +1,5 @@
+import 
+
 export default class project {
     constructor(title) {
         this.title = title
@@ -12,5 +14,9 @@ export default class project {
         this.taskList.push(task)
     }
 
-    
+    deleteTask(task) {
+
+    }
+
+
 }
