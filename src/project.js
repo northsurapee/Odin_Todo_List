@@ -1,6 +1,7 @@
-import { isToday, isThisWeek, subDays } from 'date-fns'
+import { isToday, addDays } from 'date-fns'
+import Task from './Task'
 
-export default class project {
+export default class Project {
     constructor(title) {
         this.title = title
         this.taskList = []
@@ -22,7 +23,7 @@ export default class project {
         return this.taskList
     }
 
-    isContain(taskTitle) {
+    isContainTask(taskTitle) {
         return this.taskList.some((task) => task.getTitle() === taskTitle)
     }
 
@@ -31,12 +32,16 @@ export default class project {
     }
 
     addTask(newTask) {
-        if (this.isContain(newTask.getTitle())) return
+        if (this.isContainTask(newTask.getTitle())) return
         this.taskList.push(newTask)
     }
 
     deleteTask(taskTitle) {
         this.taskList = this.taskList.filter((task) => task.getTitle() != taskTitle)
+    }
+
+    deleteAllTask() {
+        this.taskList = []
     }
 
     // for default 'Today' project
@@ -45,7 +50,13 @@ export default class project {
     }
 
     // for default 'Next 7 Days' project
-    getThisWeekTasks() {
-        return this.taskList.filter((task) => isThisWeek(task.getDate()))
+    getNext7DayTasks() {
+        const today = new Date();
+        const next7Days = addDays(today, 7);
+    
+        return this.taskList.filter((task) => {
+            const taskDate = task.getDate(); 
+            return today <= taskDate && taskDate <= next7Days;
+        });
     }
 }
