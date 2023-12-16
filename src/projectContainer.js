@@ -1,5 +1,4 @@
-import Project from './Project'
-import Task from './Task'
+import Project from './project'
 
 export default class ProjectContainer {
     constructor() {
@@ -8,10 +7,6 @@ export default class ProjectContainer {
         this.projectList.push(new Project("Today"))
         this.projectList.push(new Project("Next 7 days"))
         this.projectList.push(new Project("All Tasks"))
-    }
-
-    setProjectList(projectList) {
-        this.projectList = projectList
     }
 
     getProjectList() {
@@ -35,9 +30,25 @@ export default class ProjectContainer {
         this.projectList = this.projectList.filter((project) => project.getTitle() != projectTitle)
     }
 
+    getReminderProject() {
+        return this.getProject('Reminder')
+    }
+
+    getAllTaskProject() {
+        return this.getProject('All Tasks')
+    }
+
+    getTodayProject() {
+        return this.getProject('Today')
+    }
+
+    getNext7DayProject() {
+        return this.getProject('Next 7 days')
+    }
+
     updateAllTaskProject() {
         // Clear
-        let allTask = this.getProject('All Tasks')
+        let allTask = this.getAllTaskProject()
         allTask.deleteAllTask()
         // For each project
         this.projectList.forEach((project) => {
@@ -55,10 +66,11 @@ export default class ProjectContainer {
     }
 
     updateTodayProject() {
-        this.getProject('today').setTaskList(this.getProject('All Tasks').getTodayTasks())
+        let allTodayTask = this.getAllTaskProject().getTodayTasks()
+        this.getTodayProject().setTaskList(allTodayTask)
     }
 
     updateNext7DayProject() {
-        this.getProject('Next 7 days').setTaskList(this.getProject('All Tasks').getNext7DayTasks())
+        this.getNext7DayProject().setTaskList(this.getAllTaskProject().getNext7DayTasks())
     }
 }

@@ -1,5 +1,4 @@
 import { isToday, addDays } from 'date-fns'
-import Task from './Task'
 
 export default class Project {
     constructor(title) {
@@ -15,8 +14,8 @@ export default class Project {
         return this.title
     }
 
-    setTask(taskList) {
-        this.taskList = taskList
+    setTaskList(newTaskList) {
+        this.taskList = newTaskList
     }
 
     getTaskList() {
@@ -56,7 +55,7 @@ export default class Project {
     
         return this.taskList.filter((task) => {
             const taskDate = task.getDate(); 
-            return today <= taskDate && taskDate <= next7Days;
+            return today === taskDate | today <= taskDate && taskDate <= next7Days;
         });
     }
 }
