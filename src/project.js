@@ -1,4 +1,4 @@
-import { isToday, isThisWeek, subDays } from 'data-fns'
+import { isToday, isThisWeek, subDays } from 'date-fns'
 
 export default class project {
     constructor(title) {
