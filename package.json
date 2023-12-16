@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "push": "git subtree push --prefix dist origin gh-pages" 
+    "push": "git subtree push --prefix dist origin gh-pages"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "data-fns": "^1.1.0"
   }
 }
