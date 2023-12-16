@@ -2,7 +2,7 @@ export default class Task {
     constructor(title, description, dueDate = 'No Due Date') {
         this.title = title
         this.description = description
-        this.dueDate = dueDate // 'dd/mm/yy'
+        this.dueDate = dueDate // Date build-in obj.
         this.complete = false
     }
 

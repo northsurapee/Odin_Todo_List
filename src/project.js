@@ -1,4 +1,4 @@
-import 
+import { isToday, isThisWeek, subDays } from 'data-fns'
 
 export default class project {
     constructor(title) {
@@ -6,17 +6,46 @@ export default class project {
         this.taskList = []
     }
 
+    setTitle() {
+        this.title = title
+    }
+
     getTitle() {
         return this.title
     }
 
-    addTask(task) {
-        this.taskList.push(task)
+    setTask(taskList) {
+        this.taskList = taskList
     }
 
-    deleteTask(task) {
-
+    getTaskList() {
+        return this.taskList
     }
 
+    isContain(taskTitle) {
+        return this.taskList.some((task) => task.getTitle() === taskTitle)
+    }
 
+    getTask(taskTitle) {
+        return this.taskList.find((task) => task.getTitle() === taskTitle)
+    }
+
+    addTask(newTask) {
+        if (this.isContain(newTask.getTitle())) return
+        this.taskList.push(newTask)
+    }
+
+    deleteTask(taskTitle) {
+        this.taskList = this.taskList.filter((task) => task.getTitle() != taskTitle)
+    }
+
+    // for default 'Today' project
+    getTodayTasks() {
+        return this.taskList.filter((task) => isToday(task.getDate()))
+    }
+
+    // for default 'Next 7 Days' project
+    getThisWeekTasks() {
+        return this.taskList.filter((task) => isThisWeek(task.getDate()))
+    }
 }
