@@ -3,7 +3,7 @@ export default class Task {
         this.title = title
         this.description = description
         this.dueDate = dueDate // 'dd/mm/yy'
-        this.status = false
+        this.complete = false
     }
 
     setTitle(title) {
@@ -37,11 +37,11 @@ export default class Task {
     //     return `${day}/${month}/${year}`
     // }
 
-    setStatus(status) {
-        this.status = status
+    setComplete() {
+        this.complete = true
     }
 
-    getStatus() {
-        return this.status
+    isComplete() {
+        return this.complete
     }
 }
