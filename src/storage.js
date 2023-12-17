@@ -1,85 +1,80 @@
-import Project from './project'
-import Task from './task'
-import ProjectContainer from './projectContainer'
-
-/*
-- Web Storage API, specifically localStorage and sessionStorage, stores data as strings.
-  To store and retrieve complex data types like objects, JSON is often used.
-- JSON (JavaScript Object Notation) is a common and convenient format for representing
-  complex data structures in a string form
-*/
+import Project from './Project'
+import Task from './Task'
+import TodoList from './TodoList'
 
 export default class Storage {
-  static saveProjectContainer(data) {
-    localStorage.setItem('projectContainer', JSON.stringify(data)) // JSON = JSON.stringify(Js object)
+  static saveTodoList(data) {
+    localStorage.setItem('todoList', JSON.stringify(data))
   }
 
-  static getProjectContainer() {
-    const projectContainer = Object.assign(
-        new ProjectContainer(),
-        JSON.parse(localStorage.getItem('projectContainer')) // Js object = JSON.parse(JSON)
+  static getTodoList() {
+    const todoList = Object.assign(
+      new TodoList(),
+      JSON.parse(localStorage.getItem('todoList'))
     )
 
-    projectContainer.setProjectList(
-        projectContainer
-        .getProjectList()
+    todoList.setProjects(
+      todoList
+        .getProjects()
         .map((project) => Object.assign(new Project(), project))
     )
 
-    projectContainer
-        .getProjectList()
-        .forEach((project) => project.setTaskList(
-            project.getTaskList().map((task) => Object.assign(new Task(), task))
-            )
+    todoList
+      .getProjects()
+      .forEach((project) =>
+        project.setTasks(
+          project.getTasks().map((task) => Object.assign(new Task(), task))
+        )
       )
-    return projectContainer
+
+    return todoList
   }
 
   static addProject(project) {
-    const projectContainer = Storage.getProjectContainer()
-    projectContainer.addProject(project)
-    Storage.saveProjectContainer(projectContainer)
+    const todoList = Storage.getTodoList()
+    todoList.addProject(project)
+    Storage.saveTodoList(todoList)
   }
 
   static deleteProject(projectName) {
-    const projectContainer = Storage.getProjectContainer()
-    projectContainer.deleteProject(projectName)
-    Storage.saveProjectContainer(projectContainer)
+    const todoList = Storage.getTodoList()
+    todoList.deleteProject(projectName)
+    Storage.saveTodoList(todoList)
   }
 
   static addTask(projectName, task) {
-    const projectContainer = Storage.getProjectContainer()
-    projectContainer.getProject(projectName).addTask(task)
-    Storage.saveProjectContainer(projectContainer)
+    const todoList = Storage.getTodoList()
+    todoList.getProject(projectName).addTask(task)
+    Storage.saveTodoList(todoList)
   }
 
   static deleteTask(projectName, taskName) {
-    const projectContainer = Storage.getProjectContainer()
-    projectContainer.getProject(projectName).deleteTask(taskName)
-    Storage.saveProjectContainer(projectContainer)
+    const todoList = Storage.getTodoList()
+    todoList.getProject(projectName).deleteTask(taskName)
+    Storage.saveTodoList(todoList)
   }
 
   static renameTask(projectName, taskName, newTaskName) {
-    const projectContainer = Storage.getProjectContainer()
-    projectContainer.getProject(projectName).getTask(taskName).setName(newTaskName)
-    Storage.saveProjectContainer(projectContainer)
+    const todoList = Storage.getTodoList()
+    todoList.getProject(projectName).getTask(taskName).setName(newTaskName)
+    Storage.saveTodoList(todoList)
   }
 
   static setTaskDate(projectName, taskName, newDueDate) {
-    const projectContainer = Storage.getProjectContainer()
-    projectContainer.getProject(projectName).getTask(taskName).setDate(newDueDate)
-    Storage.saveProjectContainer(projectContainer)
+    const todoList = Storage.getTodoList()
+    todoList.getProject(projectName).getTask(taskName).setDate(newDueDate)
+    Storage.saveTodoList(todoList)
   }
 
   static updateTodayProject() {
-    const projectContainer = Storage.getProjectContainer()
-    projectContainer.updateTodayProject()
-    Storage.saveProjectContainer(projectContainer)
+    const todoList = Storage.getTodoList()
+    todoList.updateTodayProject()
+    Storage.saveTodoList(todoList)
   }
 
-  static updateNext7DayProject() {
-    const projectContainer = Storage.getProjectContainer()
-    projectContainer.updateNext7DayProject()
-    Storage.saveProjectContainer(projectContainer)
+  static updateWeekProject() {
+    const todoList = Storage.getTodoList()
+    todoList.updateWeekProject()
+    Storage.saveTodoList(todoList)
   }
 }
