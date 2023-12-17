@@ -1,3 +1,7 @@
+import UI from './modules/UI'
+
+document.addEventListener('DOMContentLoaded', UI.loadHomepage)
+
 // import Project from './project'
 // import Task from './task'
 // import ProjectContainer from './projectContainer'

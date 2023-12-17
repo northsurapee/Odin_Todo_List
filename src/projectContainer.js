@@ -3,7 +3,6 @@ import Project from './project'
 export default class ProjectContainer {
     constructor() {
         this.projectList = []
-        this.projectList.push(new Project("Reminder"))
         this.projectList.push(new Project("Today"))
         this.projectList.push(new Project("Next 7 days"))
         this.projectList.push(new Project("All Tasks"))
@@ -34,10 +33,6 @@ export default class ProjectContainer {
         this.projectList = this.projectList.filter((project) => project.getTitle() != projectTitle)
     }
 
-    getReminderProject() {
-        return this.getProject('Reminder')
-    }
-
     getAllTaskProject() {
         return this.getProject('All Tasks')
     }
@@ -57,7 +52,6 @@ export default class ProjectContainer {
         // For each project
         this.projectList.forEach((project) => {
             if (
-                project.getTitle() === 'Reminder' ||
                 project.getTitle() === 'Today' ||
                 project.getTitle() === 'Next 7 days' ||
                 project.getTitle() === 'All Tasks'
