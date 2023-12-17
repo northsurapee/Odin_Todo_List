@@ -4,38 +4,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List</title>
+    <link rel="shortcut icon" href="images/logo.png" />
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Tangerine:wght@400;700&display=swap" rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Yusei+Magic&display=swap"
+      rel="stylesheet"
+    />
     <script src="main.js" defer></script>
   </head>
   <body>
     <header class="header">
       <div class="logo">
-        <img class="page-logo" src="images/logo.png" alt="logo">
+        <i class="fas fa-check-double"></i>
         <h1 class="page-name">Todo List</h1>
       </div>
+      <button class="button-open-nav" id="button-open-nav">
+        <i class="fas fa-bars"></i>
+      </button>
     </header>
     <main class="main">
       <nav class="nav" id="nav">
         <!-- Default projects -->
         <div class="default-projects-list">
-          <button class="button-default-project" id="button-today-projects">Today</button>
-          <button class="button-default-project" id="button-week-projects">Next 7 days</button>
-          <button class="button-default-project" id="button-all-projects">All Tasks</button>
+          <button class="button-default-project" id="button-inbox-projects">
+            <i class="fas fa-inbox"></i>
+            Inbox
+          </button>
+          <button class="button-default-project" id="button-today-projects">
+            <i class="fas fa-calendar-day"></i>
+            Today
+          </button>
+          <button class="button-default-project" id="button-week-projects">
+            <i class="fas fa-calendar-week"></i>
+            This week
+          </button>
         </div>
         <!-- User projects -->
         <h1 class="projects-title">Projects</h1>
         <div class="projects-list" id="projects-list"></div>
-        <button class="button-add-project" id="button-add-project">Add Project</button>
+        <button class="button-add-project" id="button-add-project">
+          <i class="fas fa-plus"></i>
+          Add Project
+        </button>
         <div class="add-project-popup" id="add-project-popup">
-          <input class="input-add-project-popup" id="input-add-project-popup" type="text"/>
+          <input
+            class="input-add-project-popup"
+            id="input-add-project-popup"
+            type="text"
+          />
           <div class="add-project-popup-buttons">
-            <button class="button-add-project-popup" id="button-add-project-popup">Add</button>
-            <button class="button-cancel-project-popup" id="button-cancel-project-popup">Cancel</button>
+            <button
+              class="button-add-project-popup"
+              id="button-add-project-popup"
+            >
+              Add
+            </button>
+            <button
+              class="button-cancel-project-popup"
+              id="button-cancel-project-popup"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </nav>
