@@ -1,40 +1,29 @@
 export default class Task {
-    constructor(title, description, dueDate = 'No Due Date') {
-        this.title = title
-        this.description = description
-        this.dueDate = dueDate // Date build-in obj.
-        this.complete = false
+    constructor(name, dueDate = 'No date') {
+      this.name = name
+      this.dueDate = dueDate
     }
-
-    setTitle(title) {
-        this.title = title
+  
+    setName(name) {
+      this.name = name
     }
-
-    getTitle(title) {
-        return this.title
+  
+    getName() {
+      return this.name
     }
-
-    setDescription(description) {
-        this.description = description
-    }
-
-    getDescription(description) {
-        return this.description
-    }
-
+  
     setDate(dueDate) {
-        this.dueDate = dueDate
+      this.dueDate = dueDate
     }
-
+  
     getDate() {
-        return this.dueDate
+      return this.dueDate
     }
-
-    setComplete() {
-        this.complete = true
+  
+    getDateFormatted() {
+      const day = this.dueDate.split('/')[0]
+      const month = this.dueDate.split('/')[1]
+      const year = this.dueDate.split('/')[2]
+      return `${month}/${day}/${year}`
     }
-
-    isComplete() {
-        return this.complete
-    }
-}
+  }
