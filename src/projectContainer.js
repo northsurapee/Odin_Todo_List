@@ -13,6 +13,10 @@ export default class ProjectContainer {
         return this.projectList
     }
 
+    setProjectList(newProjectList) {
+        this.projectList = newProjectList
+    }
+
     getProject(projectTitle) {
         return this.projectList.find((project) => project.getTitle() === projectTitle)
     }
