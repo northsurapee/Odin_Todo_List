@@ -1,61 +1,55 @@
-import { isToday, addDays } from 'date-fns'
+import { toDate, isToday, isThisWeek, subDays } from 'date-fns'
 
 export default class Project {
-    constructor(title) {
-        this.title = title
-        this.taskList = []
-    }
+  constructor(name) {
+    this.name = name
+    this.tasks = []
+  }
 
-    setTitle() {
-        this.title = title
-    }
+  setName(name) {
+    this.name = name
+  }
 
-    getTitle() {
-        return this.title
-    }
+  getName() {
+    return this.name
+  }
 
-    setTaskList(newTaskList) {
-        this.taskList = newTaskList
-    }
+  setTasks(tasks) {
+    this.tasks = tasks
+  }
 
-    getTaskList() {
-        return this.taskList
-    }
+  getTasks() {
+    return this.tasks
+  }
 
-    isContainTask(taskTitle) {
-        return this.taskList.some((task) => task.getTitle() === taskTitle)
-    }
+  getTask(taskName) {
+    return this.tasks.find((task) => task.getName() === taskName)
+  }
 
-    getTask(taskTitle) {
-        return this.taskList.find((task) => task.getTitle() === taskTitle)
-    }
+  contains(taskName) {
+    return this.tasks.some((task) => task.getName() === taskName)
+  }
 
-    addTask(newTask) {
-        if (this.isContainTask(newTask.getTitle())) return
-        this.taskList.push(newTask)
-    }
+  addTask(newTask) {
+    if (this.tasks.find((task) => task.getName() === newTask.name)) return
+    this.tasks.push(newTask)
+  }
 
-    deleteTask(taskTitle) {
-        this.taskList = this.taskList.filter((task) => task.getTitle() != taskTitle)
-    }
+  deleteTask(taskName) {
+    this.tasks = this.tasks.filter((task) => task.name !== taskName)
+  }
 
-    deleteAllTask() {
-        this.taskList = []
-    }
+  getTasksToday() {
+    return this.tasks.filter((task) => {
+      const taskDate = new Date(task.getDateFormatted())
+      return isToday(toDate(taskDate))
+    })
+  }
 
-    // for default 'Today' project
-    getTodayTasks() {
-        return this.taskList.filter((task) => isToday(task.getDate()))
-    }
-
-    // for default 'Next 7 Days' project
-    getNext7DayTasks() {
-        const today = new Date();
-        const next7Days = addDays(today, 7);
-    
-        return this.taskList.filter((task) => {
-            const taskDate = task.getDate(); 
-            return today === taskDate | today <= taskDate && taskDate <= next7Days;
-        });
-    }
+  getTasksThisWeek() {
+    return this.tasks.filter((task) => {
+      const taskDate = new Date(task.getDateFormatted())
+      return isThisWeek(subDays(toDate(taskDate), 1))
+    })
+  }
 }
