@@ -1,6 +1,6 @@
-import Project from './Project'
-import Task from './Task'
-import TodoList from './TodoList'
+import Project from './project'
+import Task from './task'
+import TodoList from './todoList'
 
 export default class Storage {
   static saveTodoList(data) {
