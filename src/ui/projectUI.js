@@ -5,6 +5,7 @@ import TaskUI from './taskUI'
 
 export default class ProjectUI {
 
+  // LOAD CONTENT
   static loadProjects() {
     Storage.getTodoList()
       .getProjects()
@@ -19,21 +20,6 @@ export default class ProjectUI {
       })
     ProjectUI.initProjectButtons()
     ProjectUI.initAddProjectButtons()
-  }
-
-  
-  static createProject(name) {
-    const userProjects = document.getElementById('projects-list')
-    userProjects.innerHTML += ` 
-      <button class="button-project" data-project-button>
-        <div class="left-project-panel">
-          <i class="fas fa-tasks"></i>
-          <span>${name}</span>
-        </div>
-        <div class="right-project-panel">
-          <i class="fas fa-times"></i>
-        </div>
-      </button>`
   }
 
 
@@ -72,6 +58,36 @@ export default class ProjectUI {
     TaskUI.loadTasks(projectName)
   }
 
+  // CREATE CONTENT
+  static createProject(name) {
+    const userProjects = document.getElementById('projects-list')
+    userProjects.innerHTML += ` 
+      <button class="button-project" data-project-button>
+        <div class="left-project-panel">
+          <i class="fas fa-tasks"></i>
+          <span>${name}</span>
+        </div>
+        <div class="right-project-panel">
+          <i class="fas fa-times"></i>
+        </div>
+      </button>`
+  }
+
+  // OPEN CONTENT
+  static openProject(projectName, projectButton) {
+    const defaultProjectButtons = document.querySelectorAll(
+      '.button-default-project'
+    )
+    const projectButtons = document.querySelectorAll('.button-project')
+    const buttons = [...defaultProjectButtons, ...projectButtons]
+
+    buttons.forEach((button) => button.classList.remove('active'))
+    projectButton.classList.add('active')
+    ProjectUI.closeAddProjectPopup()
+    ProjectUI.loadProjectContent(projectName)
+  }
+  
+  // PROJECT ADD EVENT LISTENER
   static initAddProjectButtons() {
     const addProjectButton = document.getElementById('button-add-project')
     const addProjectPopupButton = document.getElementById(
@@ -87,10 +103,6 @@ export default class ProjectUI {
     addProjectButton.addEventListener('click', ProjectUI.openAddProjectPopup)
     addProjectPopupButton.addEventListener('click', ProjectUI.addProject)
     cancelProjectPopupButton.addEventListener('click', ProjectUI.closeAddProjectPopup)
-    addProjectPopupInput.addEventListener(
-      'keypress',
-      ProjectUI.handleAddProjectPopupInput
-    )
   }
 
   static openAddProjectPopup() {
@@ -136,12 +148,7 @@ export default class ProjectUI {
     ProjectUI.closeAddProjectPopup()
   }
 
-  static handleAddProjectPopupInput(e) {
-    if (e.key === 'Enter') MainUI.addProject()
-  }
-
   // PROJECT EVENT LISTENERS
-
   static initProjectButtons() {
     const inboxProjectsButton = document.getElementById('button-inbox-projects')
     const todayProjectsButton = document.getElementById('button-today-projects')
@@ -155,7 +162,7 @@ export default class ProjectUI {
     projectButtons.forEach((projectButton) =>
       projectButton.addEventListener('click', ProjectUI.handleProjectButton)
     )
-    openNavButton.addEventListener('click', ProjectUI.openNav)
+    openNavButton.addEventListener('click', MainUI.openNav)
   }
 
   static openInboxTasks() {
@@ -190,10 +197,13 @@ export default class ProjectUI {
     ProjectUI.loadProjects()
   }
 
-  static openNav() {
-    const nav = document.getElementById('nav')
+  static clearProjectPreview() {
+    const projectPreview = document.getElementById('project-preview')
+    projectPreview.textContent = ''
+  }
 
-    MainUI.closeAllPopups()
-    nav.classList.toggle('active')
+  static clearProjects() {
+    const projectsList = document.getElementById('projects-list')
+    projectsList.textContent = ''
   }
 }

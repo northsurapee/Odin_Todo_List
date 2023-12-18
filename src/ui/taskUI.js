@@ -1,14 +1,11 @@
 import { format } from 'date-fns' 
 import Task from '../logic/task'
-import Project from '../logic/project'
-import TodoList  from '../logic/todoList'
 import Storage from '../logic/storage'
 import MainUI from './mainUI'
 
 export default class TaskUI {
 
     // ADD TASK EVENT LISTENERS
-
     static loadTasks(projectName) {
         Storage.getTodoList()
           .getProject(projectName)
@@ -97,7 +94,6 @@ export default class TaskUI {
     }
   
     // TASK EVENT LISTENERS
-  
     static initTaskButtons() {
       const taskButtons = document.querySelectorAll('[data-task-button]')
       const taskNameInputs = document.querySelectorAll('[data-input-task-name')
@@ -263,5 +259,10 @@ export default class TaskUI {
       TaskUI.clearTasks()
       TaskUI.loadTasks(projectName)
       TaskUI.closeSetDateInput(taskButton)
+    }
+
+    static clearTasks() {
+      const tasksList = document.getElementById('tasks-list')
+      tasksList.textContent = ''
     }
   }
