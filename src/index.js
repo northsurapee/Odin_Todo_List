@@ -1,3 +1,3 @@
-import UI from './ui'
+import MainUI from './ui/mainUI'
 
-document.addEventListener('DOMContentLoaded', UI.loadHomepage)
+document.addEventListener('DOMContentLoaded', MainUI.loadHomepage())
