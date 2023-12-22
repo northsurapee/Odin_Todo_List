@@ -1,7 +1,7 @@
 # Odin_Todo_List
 - This is a Basic Todo-List
 - using date-fns package
-- Live demo :
+- Live demo : https://northsurapee.github.io/Odin_Todo_List/
 
 ## Functionality
 - add projects 
